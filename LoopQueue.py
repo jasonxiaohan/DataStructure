@@ -87,7 +87,14 @@ class LoopQueue(Queue):
         return self.__data[self.__front]
 
 if __name__ == '__main__':
-    loopQueue = LoopQueue(2)
+    loopQueue = LoopQueue()
+    for i in range(10):
+        loopQueue.enqueue(i)
+        print(loopQueue)
+        if i % 3 == 2:
+            loopQueue.dequeue()
+            print(loopQueue)
+    """
     loopQueue.enqueue(11)
     print(loopQueue)
     loopQueue.enqueue(22)
@@ -97,3 +104,4 @@ if __name__ == '__main__':
     print(loopQueue)
     loopQueue.dequeue()
     print(loopQueue)
+    """
