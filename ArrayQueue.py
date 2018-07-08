@@ -1,8 +1,9 @@
 # -*- coding:utf-8 -*-
 from DataStructure.Queue import Queue
 from DataStructure.Array import Array
+
 """
-队列实现类
+数组队列
 """
 class ArrayQueue(Queue):
     def __init__(self, capacity=10):

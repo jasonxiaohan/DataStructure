@@ -1,5 +1,9 @@
 # -*- coding:utf-8 -*-
 from DataStructure.Queue import Queue
+
+"""
+循环队列
+"""
 class LoopQueue(Queue):
     __data = []
     # __front：队首 __tail：队尾

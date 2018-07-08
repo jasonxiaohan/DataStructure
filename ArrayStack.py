@@ -2,6 +2,9 @@
 from DataStructure.Stack import Stack
 from DataStructure.Array import Array
 
+"""
+栈
+"""
 class ArrayStack(Stack):
     data = []
     def __init__(self, capacity=10):
