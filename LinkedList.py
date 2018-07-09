@@ -51,7 +51,6 @@ class LinkedList:
         # prev.next = node
 
         prev.next = self.__Node(e, prev.next)
-
         self.__size += 1
 
     """
@@ -89,7 +88,7 @@ class LinkedList:
     获取链表的最后一个元素
     """
     def getLast(self):
-        return self.get(self.__size-1)
+        return self.get(int(self.__size-1))
 
     """
     修改链表的第index(0-based)位置的元素e
@@ -108,10 +107,13 @@ class LinkedList:
     """
     def contains(self, e):
         cur = self.__dummyHead.next
-        while cur != self.__Node:
-            if cur.e == e:
-                return True
-            cur = cur.next
+        while cur != None:
+            try:
+                if str(cur.e) == str(e):
+                    return True
+                cur = cur.next
+            except Exception as e:
+                return False
         return False
 
     def __str__(self):
@@ -130,3 +132,5 @@ if __name__ == '__main__':
         print(linkedList)
     linkedList.add(2, 666)
     print(linkedList)
+
+    print(linkedList.contains(6666))
