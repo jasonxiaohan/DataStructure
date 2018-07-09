@@ -15,6 +15,7 @@ class LinkedList:
         def __str__(self):
             return str(self.e)
 
+    # 虚拟头节点
     __dummyHead = None
     __size = 0
 
@@ -54,8 +55,8 @@ class LinkedList:
         self.__size += 1
 
     """
-        在链表头添加元素e
-        """
+    在链表头添加元素e
+    """
 
     def addFirst(self, e):
         self.add(0, e)
@@ -116,6 +117,31 @@ class LinkedList:
                 return False
         return False
 
+    """
+     从链表中删除index(0-based)位置的元素，返回删除的元素
+    """
+    def remove(self, index):
+        prev = self.__dummyHead
+        for i in range(int(index)):
+            prev = prev.next
+
+        retNode = prev.next
+        prev.next = retNode.next
+        retNode.next = None
+        self.__size -= 1
+        return retNode.e
+    """
+    从链表中删除第一个元素，返回删除的元素
+    """
+    def removeFirst(self):
+        return self.remove(0)
+
+    """
+    从链表中删除最后一个元素，返回删除的元素
+    """
+    def removeLast(self):
+        return self.remove(int(self.__size-1))
+
     def __str__(self):
         res = ""
         cur = self.__dummyHead.next
@@ -133,4 +159,9 @@ if __name__ == '__main__':
     linkedList.add(2, 666)
     print(linkedList)
 
-    print(linkedList.contains(6666))
+    linkedList.remove(2)
+    print(linkedList)
+    linkedList.removeFirst()
+    print(linkedList)
+    linkedList.removeLast()
+    print(linkedList)

@@ -17,7 +17,7 @@ class Stack:
     """
     写入栈元素
     """
-    def push(self):
+    def push(self, e):
         pass
 
     """

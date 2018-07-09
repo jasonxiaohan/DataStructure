@@ -40,13 +40,8 @@ class ArrayStack(Stack):
 
 if __name__ == '__main__':
     arrayStack = ArrayStack()
-    arrayStack.push(11)
-    arrayStack.push(22)
-    arrayStack.push(33)
-    arrayStack.push(44)
-    arrayStack.push(55)
-    print(arrayStack)
-    arrayStack.pop()
-    print(arrayStack)
+    for i in range(5):
+        arrayStack.pop(i)
+        print(arrayStack)
     arrayStack.pop()
     print(arrayStack)
