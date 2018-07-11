@@ -7,6 +7,7 @@ from DataStructure.LoopQueue import LoopQueue
 
 from DataStructure.ArrayStack import ArrayStack
 from DataStructure.LinkedListStack import LinkedListStack
+from DataStructure.LinkedListQueue import LinkedListQueue
 
 """
 
@@ -39,7 +40,7 @@ class Main():
 if __name__ == '__main__':
     opCount = 10000
     main = Main()
-    """
+
     arrayQueue = ArrayQueue()
     time1 = main._testQueue(arrayQueue, opCount)
     print("ArrayQueue,time："+str(time1) +"s")
@@ -47,10 +48,15 @@ if __name__ == '__main__':
     loopQueue = LoopQueue()
     time2 = main._testQueue(loopQueue, opCount)
     print("LoopQueue,time："+str(time2) +"s")
-    """
+
+    linkedListQueue = LinkedListQueue()
+    time3 = main._testQueue(linkedListQueue, opCount)
+    print("LinkedListQueue,time："+str(time3)+"s")
+
     # 测试队列与循环队列执行的效率
 
     # 测试stack
+    """
     arrayStack = ArrayStack()
     time1 = main._testStack(arrayStack, opCount)
     print("ArrayStack,time："+str(time1)+"s")
@@ -58,3 +64,4 @@ if __name__ == '__main__':
     linkedListStack = LinkedListStack()
     time2 = main._testStack(linkedListStack, opCount)
     print("LinkedListStack,time："+str(time2)+"s")
+    """
