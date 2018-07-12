@@ -1,13 +1,6 @@
 # -*- coding:utf8 -*-
 from DataStructure.ArrayStack import ArrayStack
-
-class ListNode(object):
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-
-    def __str__(self):
-        return str(self.val)
+from DataStructure.ListNode import ListNode
 
 class Solution:
     """
@@ -137,9 +130,10 @@ class Solution:
 
 if __name__ == '__main__':
     solution = Solution()
-    listNode = ListNode(1)
-    print(listNode)
-    res = solution.removeElements(listNode, 6)
+    nums = [1,2,6,3,4,5,6]
+    head = ListNode(None, nums)
+    print(head)
+    res = solution.removeElements(head, 6)
     print(res)
 # if _name__ == '__main__':
     # solution = Solution()
