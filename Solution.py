@@ -128,6 +128,22 @@ class Solution:
                 prev = prev.next
         return dummyHead.next
 
+    """
+    Write a Count() function that counts the number of times a given int occurs in a list. The 
+    code for this has the classic list traversal structure as demonstrated in Length().
+    """
+    def Count(self, head, val):
+        dummpyHead = ListNode(-1)
+
+        dummpyHead.next = head
+        prev = dummpyHead
+        count = 0
+        while prev.next != None:
+            if prev.next.val == val:
+                count += 1
+            prev = prev.next
+        return count
+
 if __name__ == '__main__':
     solution = Solution()
     nums = [1,2,6,3,4,5,6]
@@ -135,8 +151,6 @@ if __name__ == '__main__':
     print(head)
     res = solution.removeElements(head, 6)
     print(res)
-# if _name__ == '__main__':
-    # solution = Solution()
     """
     20. 有效的括号
     """
@@ -145,3 +159,7 @@ if __name__ == '__main__':
 
     # data = solution.removeDuplicateLetters("cbacdcbc")
     # print(data)
+    # nums = [1, 2, 6, 3, 4, 5, 6]
+    # head = ListNode(None, nums)
+    count = solution.Count(head, 1)
+    print(count)

@@ -14,9 +14,32 @@ class BinarySearchTree:
 
     root = None
     size = 0
+    res = ""
 
     def __init__(self):
         self.size = 0
+
+    def __str__(self):
+        str(self.__generateBSTString(self.root, 0))
+        return self.res
+
+    """
+    生成以node为根节点，深度为depth的描述二叉树的字符串
+    """
+    def __generateBSTString(self, node, depth):
+        if node == None:
+            self.res += self.__generateDepthString(depth)+"null\n"
+            return
+        self.res += self.__generateDepthString(depth) + str(node.e) +"\n"
+
+        str(self.__generateBSTString(node.left, int(depth + 1)))
+        str(self.__generateBSTString(node.right, int(depth + 1)))
+
+    def __generateDepthString(self, depth):
+        re = ""
+        for i in range(depth):
+            re+="--"
+        return re
 
     def geSize(self):
         return self.size
@@ -32,7 +55,7 @@ class BinarySearchTree:
         else:
             self.__add(self.root, e)
         """
-        root = self.__add(e)
+        self.root = self.__add(self.root, e)
     """
    向node为根的二分搜索树中插入元素e，递归算法 
    返回插入新节点后二分搜索树的根
@@ -59,3 +82,47 @@ class BinarySearchTree:
         elif e> node.e:
             node.right = self.__add(node.right, e)
         return node
+
+    """
+    看二分搜索树中是否包含元素e
+    """
+    def contains(self, e):
+        return self.__contains(self.root, e)
+
+    """
+    看以node为根的二分搜索树中是否包含元素e，递归算法
+    """
+    def __contains(self, node, e):
+        if node == None:
+            return False
+        if node.e == e:
+            return True
+        elif e < node.e:
+            return self.__contains(node.left, e)
+        else:
+            return self.__contains(node.right, e)
+
+    """
+    二分搜索树的前序遍历
+    """
+    def preOrder(self):
+        self.__preOrder(self.root)
+
+    """
+    前序遍历以node为根的二分搜索树，递归算法
+    """
+    def __preOrder(self, node):
+        if node == None:
+            return
+        print(node.e)
+        self.__preOrder(node.left)
+        self.__preOrder(node.right)
+
+if __name__ == '__main__':
+    bst = BinarySearchTree()
+    nums = [5,3,6,8,4,2]
+    for i in nums:
+        bst.add(i)
+    bst.preOrder()
+    print("")
+    print(bst)
