@@ -118,6 +118,35 @@ class BinarySearchTree:
         self.__preOrder(node.left)
         self.__preOrder(node.right)
 
+    """
+    二分搜索树的中序遍历
+    """
+    def inOrder(self):
+        self.__inOrder(self.root)
+
+    """
+    中序遍历以node为根的二分搜索树，递归算法
+    """
+    def __inOrder(self, node):
+        if node == None:
+            return
+        self.__inOrder(node.left)
+        print(node.e)
+        self.__inOrder(node.right)
+
+    """
+    二分搜索树的后序遍历
+    """
+    def postOrder(self):
+        self.__postOrder(self.root)
+
+    def __postOrder(self, node):
+        if node == None:
+            return
+        self.__postOrder(node.left)
+        self.__postOrder(node.right)
+        print(node.e)
+
 if __name__ == '__main__':
     bst = BinarySearchTree()
     nums = [5,3,6,8,4,2]
@@ -125,4 +154,6 @@ if __name__ == '__main__':
         bst.add(i)
     bst.preOrder()
     print("")
-    print(bst)
+    print(bst.inOrder())
+    print("")
+    print(bst.postOrder())
