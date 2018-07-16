@@ -4,8 +4,6 @@
 二分搜索树
 """
 
-from DataStructure.LinkedListStack import LinkedListStack
-
 class BinarySearchTree:
     class Node:
         e = None
@@ -120,22 +118,6 @@ class BinarySearchTree:
         self.__preOrder(node.left)
         self.__preOrder(node.right)
 
-    """
-    二分搜索树的非递归前序遍历
-    """
-    def preOrderNR(self):
-        stack = LinkedListStack()
-        stack.push(self.root)
-        while stack.isEmpty() != None:
-            cur = stack.pop()
-            if(cur == None):
-                break
-            print(str(cur.e))
-            if(cur.right != None):
-                stack.push(cur.right)
-            if(cur.left != None):
-                stack.push(cur.left)
-
 if __name__ == '__main__':
     bst = BinarySearchTree()
     nums = [5,3,6,8,4,2]
@@ -143,4 +125,4 @@ if __name__ == '__main__':
         bst.add(i)
     bst.preOrder()
     print("")
-    bst.preOrderNR()
+    print(bst)
