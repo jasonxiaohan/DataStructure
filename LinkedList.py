@@ -121,6 +121,10 @@ class LinkedList:
      从链表中删除index(0-based)位置的元素，返回删除的元素
     """
     def remove(self, index):
+        if (index < 0 or index >= self.__size):
+            print("Remove failed. Index is illegal.")
+            return
+
         prev = self.__dummyHead
         for i in range(int(index)):
             prev = prev.next

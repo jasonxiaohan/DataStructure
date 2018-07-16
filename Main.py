@@ -56,7 +56,7 @@ if __name__ == '__main__':
     # 测试队列与循环队列执行的效率
 
     # 测试stack
-    """
+    """"""
     arrayStack = ArrayStack()
     time1 = main._testStack(arrayStack, opCount)
     print("ArrayStack,time："+str(time1)+"s")
@@ -64,4 +64,3 @@ if __name__ == '__main__':
     linkedListStack = LinkedListStack()
     time2 = main._testStack(linkedListStack, opCount)
     print("LinkedListStack,time："+str(time2)+"s")
-    """
