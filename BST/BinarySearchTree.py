@@ -3,6 +3,8 @@
 @author daixiaohan
 二分搜索树
 """
+from DataStructure.LinkedListStack import LinkedListStack
+from DataStructure.LinkedList import LinkedList
 
 class BinarySearchTree:
     class Node:
@@ -118,11 +120,123 @@ class BinarySearchTree:
         self.__preOrder(node.left)
         self.__preOrder(node.right)
 
+    """
+    前序遍历以node为根的二分搜索树，非递归算法
+    """
+    def preOrderNR(self):
+        stack = LinkedListStack()
+        stack.push(self.root)
+        while not stack.isEmpty():
+            cur = stack.pop()
+            print(cur.e)
+            if(cur.right != None):
+                stack.push(cur.right)
+            if(cur.left != None):
+                stack.push(cur.left)
+
+    """
+    二分搜索树的层序遍历(广度优先遍历)
+    """
+    def levelOrder(self):
+        queue = LinkedList()
+        queue.addFirst(self.root)
+        while not queue.isEmpty():
+            cur = queue.removeFirst()
+            print(cur.e)
+            if(cur.left != None):
+                queue.addLast(cur.left)
+            if(cur.right != None):
+                queue.addLast(cur.right)
+
+    """
+    寻找二分搜索树的最小元素
+    """
+    def minxmum(self):
+        return self.__minxmum(self.root).e
+
+    def __minxmum(self, node):
+        if(self.size == 0):
+            print("BST is empty.")
+            return
+        if(node.left == None):
+            return node
+        return self.__minxmum(node.left)
+
+    """
+    寻找二分搜索树中的最大元素
+    """
+    def maximum(self):
+        return self.__maximum(self.root).e
+
+    def __maximum(self, node):
+        if(self.size == 0):
+            print("BST is empty.")
+            return
+        if(node.right == None):
+            return node
+        return self.__maximum(node.right)
+
+    """
+    从二分搜索树中删除最小值所在节点，并返回最小值
+    """
+    def removeMin(self):
+        e = self.minxmum()
+        self.root = self.__removeMin(self.root)
+        return e
+
+    def __removeMin(self, node):
+        if(node.left == None):
+            rightNode = node.right
+            node.right = None
+            self.size -= 1
+            return rightNode
+        node.left = self.__removeMin(node.left)
+        return node
+
+    """
+    从二分搜索树中删除最大值所在的节点，并返回最大值
+    """
+    def removeMax(self):
+        e = self.maximum()
+        self.root = self.__removeMax(self.root)
+        return e
+    def __removeMax(self, node):
+        if(node.right == None):
+            leftNode = node.left
+            node.left = None
+            self.size -= 1
+            return leftNode
+        node.right = self.__removeMax(node.right)
+        return node
+
+
+
 if __name__ == '__main__':
+    """
+         5 
+       /   \ 
+      3     6 
+     /  \    \ 
+    2    4    8 
+    """
     bst = BinarySearchTree()
     nums = [5,3,6,8,4,2]
     for i in nums:
         bst.add(i)
     bst.preOrder()
     print("")
+    # print(bst)
+    bst.preOrderNR()
+    print("")
+    bst.levelOrder()
+    print("")
+    print(bst.minxmum())
+    print("")
+    print(bst.maximum())
+    print("")
+    print("删除最小节点："+ str(bst.removeMin()))
+    print(bst)
+    print("----")
+    # print("删除最大节点："+ str(bst.removeMax()))
+    bst.removeMax()
     print(bst)
