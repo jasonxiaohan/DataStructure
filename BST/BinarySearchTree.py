@@ -9,6 +9,7 @@ from DataStructure.LinkedList import LinkedList
 class BinarySearchTree:
     class Node:
         e = None
+        # 左子树、右子树
         left = right = None
 
         def __init__(self, e):
@@ -209,6 +210,40 @@ class BinarySearchTree:
         node.right = self.__removeMax(node.right)
         return node
 
+    """
+    删除元素e
+    """
+    def remove(self, e):
+        self.root = self.__remove(self.root, e)
+
+    def __remove(self, node, e):
+        if(node == None):
+            return None
+        if(e < node.e):
+            node.left = self.__remove(node.left, e)
+            return node
+        elif(e > node.e):
+            node.right = self.__remove(node.right, e)
+            return node
+        else:
+            if(node.left == None):
+                nodeRight = node.right
+                node.right = None
+                self.size -= 1
+                return nodeRight
+            if(node.right == None):
+                nodeLeft = node.left
+                node.left = None
+                self.size -= 1
+                return nodeLeft
+            # 否则存在左右两个子树
+            successor = self.__minxmum(node.right)
+            successor.right = self.__removeMin(node.right)
+            successor.left = node.left
+            node.left = node.right = None
+            return successor
+
+
 
 
 if __name__ == '__main__':
@@ -220,12 +255,17 @@ if __name__ == '__main__':
     2    4    8 
     """
     bst = BinarySearchTree()
-    nums = [5,3,6,8,4,2]
+    # nums = [5,3,6,8,4,2]
+    nums = [41, 58, 50, 42, 53, 60, 59, 63]
     for i in nums:
         bst.add(i)
-    bst.preOrder()
+    # bst.preOrder()
     print("")
-    # print(bst)
+    print(bst)
+    print("")
+    bst.remove(58)
+    print(bst)
+    """
     bst.preOrderNR()
     print("")
     bst.levelOrder()
@@ -240,3 +280,4 @@ if __name__ == '__main__':
     # print("删除最大节点："+ str(bst.removeMax()))
     bst.removeMax()
     print(bst)
+    """
