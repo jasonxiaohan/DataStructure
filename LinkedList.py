@@ -146,6 +146,21 @@ class LinkedList:
     def removeLast(self):
         return self.remove(int(self.__size-1))
 
+    """
+    从链表中删除元素e
+    """
+    def removeElement(self, e):
+        prev = self.__dummyHead
+        while(prev.next != None):
+            if(prev.next.e == e):
+                break
+            prev = prev.next
+        if(prev.next != None):
+            node = prev.next
+            prev.next = node.next
+            node.next = None
+            self.__size -= 1
+
     def __str__(self):
         res = ""
         cur = self.__dummyHead.next

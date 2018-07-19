@@ -7,6 +7,9 @@
 from DataStructure.BST.BinarySearchTree import BinarySearchTree
 from DataStructure.Set.Set import Set
 
+"""
+集合实现类
+"""
 class BSTSet(Set):
     bst = None
     def __init__(self):
