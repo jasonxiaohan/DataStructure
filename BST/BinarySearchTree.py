@@ -44,7 +44,7 @@ class BinarySearchTree:
             re+="--"
         return re
 
-    def geSize(self):
+    def getSize(self):
         return self.size
 
     def isEmpty(self):
@@ -245,15 +245,17 @@ class BinarySearchTree:
 
 
 
-
+"""
 if __name__ == '__main__':
-    """
+  """
+"""
          5 
        /   \ 
       3     6 
      /  \    \ 
     2    4    8 
-    """
+"""
+"""
     bst = BinarySearchTree()
     # nums = [5,3,6,8,4,2]
     nums = [41, 58, 50, 42, 53, 60, 59, 63]
@@ -265,7 +267,7 @@ if __name__ == '__main__':
     print("")
     bst.remove(58)
     print(bst)
-    """
+  
     bst.preOrderNR()
     print("")
     bst.levelOrder()
