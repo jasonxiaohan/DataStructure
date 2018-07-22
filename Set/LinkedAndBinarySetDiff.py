@@ -5,7 +5,7 @@
 # @File    : LinkedAndBinarySetDiff.py
 # @Software: PyCharm
 import time
-from DataStructure.Set.FileOperation import FileOperation
+from DataStructure.FileOperation import FileOperation
 from DataStructure.Set.LinkedListSet import LinkedListSet
 from DataStructure.Set.BSTSet import BSTSet
 
@@ -35,7 +35,7 @@ class LinkedAndBinarySetDiff:
         return endTime - startTime
 
 if __name__ == '__main__':
-    filename = './pride-and-prejudice.txt'
+    filename = '../pride-and-prejudice.txt'
     bstSet = BSTSet()
     time1 = LinkedAndBinarySetDiff._testQueue(bstSet, filename)
     print("BST Set："+str(time1)+"s")

@@ -18,7 +18,7 @@ class FileOperation:
         if(filename == None):
             print("filename is null")
             return False
-        with open(filename, 'rb') as f:
+        with open(filename, encoding='UTF-8-sig') as f:
             seg_list = jieba.cut(f.read())
             for tk in seg_list:
                 if(tk.strip() != "" and tk.strip() not in ['.',',',';',':','\'']):
