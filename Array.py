@@ -154,6 +154,20 @@ class Array(object):
         if index != -1:
             self.remove(index)
 
+    def swap(self, i, j):
+        """
+        元素i和元素j进行交换
+        :param i:
+        :param j:
+        :return:
+        """
+        if(i < 0 or i >= self.__size or j < 0 or j>= self.__size):
+            print("Index is illegal.")
+            return
+        t = self.__data[i]
+        self.__data[i] = self.__data[j]
+        self.__data[j] = t
+
     """
    主函数
     """

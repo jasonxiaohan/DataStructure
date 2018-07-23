@@ -2,27 +2,29 @@
 # encoding: utf-8
 """
 @author: daixiaohan
-@license: (C) Copyright 2018, Node Supply Chain Manager Corporation Limited.
+@license: (C) Copyright 2018
 @contact: jasonxiaohan198@qq.com
 @file: MaxHeap.py
 @time: 2018/7/23 7:57
 @desc:
 """
+from DataStructure.Array import Array
+import random
 
 """
 最大堆
 """
 class MaxHeap:
-    data = None
+    __data = None
 
     def __init__(self, capacity=10):
-        self.data = [0 for i in range(capacity)]
+        self.__data = Array(capacity)
 
     def size(self):
-        return len(self.data)
+        return self.__data.getSize()
 
     def isEmpty(self):
-        return self.data == None
+        return self.__data == None
 
     def __parent(self, index):
         """
@@ -30,10 +32,12 @@ class MaxHeap:
         :param index:
         :return:
         """
-        if(index == 0):
-            print("index-0 doesn't have parent.")
-            return
-        return (index - 1)/2
+        try:
+            if(index == 0):
+                raise Exception("index-0 doesn't have parent.");
+        except Exception as err:
+            print(err)
+        return int((index - 1)/2)
 
     def __leftChild(self, index):
         """
@@ -41,7 +45,7 @@ class MaxHeap:
         :param index:
         :return:
         """
-        return int(2 * index ) + 1
+        return int(2 * index) + 1
 
     def __rightChild(self, index):
         """
@@ -50,3 +54,75 @@ class MaxHeap:
         :return:
         """
         return int(2 * index) + 2
+
+    def add(self, e):
+        """
+        向堆中添加元素
+        :param e:
+        :return:
+        """
+        self.__data.addLast(e)
+        self.__siftUp(int(self.__data.getSize() - 1))
+
+    def __siftUp(self, k):
+        while(k > 0 and self.__data.get(self.__parent(k)) < self.__data.get(k)):
+            self.__data.swap(k, self.__parent(k))
+            k = self.__parent(k)
+
+    def findMax(self):
+        try:
+            if(self.__data.getSize() == 0):
+                raise  Exception("Can not findMax when heap is empty.")
+        except Exception as err:
+            print(err)
+        return self.__data.get(0)
+
+    def extractMax(self):
+        ret = self.findMax()
+        self.__data.swap(0, int(self.__data.getSize() - 1))
+        self.__data.removeLast()
+        self.__siftDown(0)
+        return ret
+
+    def __siftDown(self, k):
+        while(self.__leftChild(k) < self.__data.getSize()):
+            j = self.__leftChild(k)
+            if(int(j + 1) < self.__data.getSize() and self.__data.get(int(j+1)) > self.__data.get(int(j))) :
+                j += 1
+
+            # self.__data[i] 是leftChild 和 rightChild 中的最大值
+            if(self.__data.get(k) > self.__data.get(j)):
+                break
+            self.__data.swap(k, j)
+            k = j
+
+    def __str__(self):
+        """
+        将类的实例变成str
+        :return:
+        """
+        res = ('Array:size = %d，capacity = %d\n') % (self.size(),self.__data.getSize())
+        res += "["
+        for i in range(self.size()):
+            res += str(self.__data.get(i))
+            if i != self.size() - 1:
+                res += ","
+        res += "]"
+        return res
+if __name__ == '__main__':
+    n = 100
+    maxHeap = MaxHeap()
+    for i in range(n):
+        maxHeap.add(random.randint(0, 10000000))
+    data = []
+    for i in range(n):
+        data.append(maxHeap.extractMax())
+    print(data)
+
+    for i in range(1, n):
+        if(data[i - 1] < data[i]):
+            try:
+                raise Exception("Error:"+str(data[i-1])+","+str(data[i]))
+            except Exception as err:
+                print("An exception："+str(err))
+    print("Test MaxHeap completed.")
