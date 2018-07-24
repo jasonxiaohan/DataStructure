@@ -17,8 +17,11 @@ import random
 class MaxHeap:
     __data = None
 
-    def __init__(self, capacity=10):
-        self.__data = Array(capacity)
+    def __init__(self, capacity=10, arr=None):
+        self.__data = Array(capacity, arr)
+        if(arr != None):
+            for i in range(int(len(arr)-1), -1, -1):
+                self.__siftDown(i)
 
     def size(self):
         return self.__data.getSize()
@@ -70,6 +73,10 @@ class MaxHeap:
             k = self.__parent(k)
 
     def findMax(self):
+        """
+        看堆中最大元素
+        :return:
+        """
         try:
             if(self.__data.getSize() == 0):
                 raise  Exception("Can not findMax when heap is empty.")
@@ -78,6 +85,10 @@ class MaxHeap:
         return self.__data.get(0)
 
     def extractMax(self):
+        """
+        取出堆中最大元素
+        :return:
+        """
         ret = self.findMax()
         self.__data.swap(0, int(self.__data.getSize() - 1))
         self.__data.removeLast()
@@ -90,18 +101,29 @@ class MaxHeap:
             if(int(j + 1) < self.__data.getSize() and self.__data.get(int(j+1)) > self.__data.get(int(j))) :
                 j += 1
 
-            # self.__data[i] 是leftChild 和 rightChild 中的最大值
+            # self.__data[j] 是leftChild 和 rightChild 中的最大值
             if(self.__data.get(k) > self.__data.get(j)):
                 break
             self.__data.swap(k, j)
             k = j
+
+    def replace(self, e):
+        """
+        取出堆中的最大元素，并将取出的元素替换成：e
+        :param e:
+        :return:
+        """
+        ret = self.findMax()
+        self.__data.set(0, e)
+        self.__siftDown(0)
+        return ret
 
     def __str__(self):
         """
         将类的实例变成str
         :return:
         """
-        res = ('Array:size = %d，capacity = %d\n') % (self.size(),self.__data.getSize())
+        res = ('Array:size = %d，capacity = %d\n') % (self.size(),self.__data.getCapacity())
         res += "["
         for i in range(self.size()):
             res += str(self.__data.get(i))

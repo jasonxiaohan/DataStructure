@@ -6,8 +6,11 @@ class Array(object):
     """
     构造函数，传入数组的容量capacity
     """
-    def __init__(self, capacity=10):
+    def __init__(self, capacity=10, arr=None):
         self.__data = [0 for i in range(capacity)]
+        if(arr != None):
+            self.__data = [i for i in range(len(arr))]
+            self.__size = len(arr)
 
     """
     将类的实例变成str
