@@ -43,11 +43,12 @@ class Solution:
                 pq.enqueue(self.Freq(key, dict[key]))
         list = []
         while not pq.isEmpty():
-            list.append(pq.dequeue().e)
+            d = pq.dequeue().e
+            list.append(d)
         return list
 
 
 if __name__ == '__main__':
     solution = Solution()
-    dict = solution.topKFrequent([1,1,1,2,2,3], 2)
+    dict = solution.topKFrequent([1,1,1,2,2,3,4], 3)
     print(dict)

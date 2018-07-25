@@ -27,7 +27,7 @@ class MaxHeap:
         return self.__data.getSize()
 
     def isEmpty(self):
-        return self.__data == None
+        return self.__data.getSize() == 0
 
     def __parent(self, index):
         """
