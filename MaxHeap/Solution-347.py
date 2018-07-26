@@ -6,6 +6,7 @@
 # @Software: PyCharm
 
 from DataStructure.MaxHeap.PriorityQueue import PriorityQueue
+import operator
 
 class Solution:
     class Freq:
@@ -34,21 +35,17 @@ class Solution:
                 dict[num] = int(dict.get(num)+1)
             else:
                 dict[num] = 1
-        pq = PriorityQueue()
-        for key in dict.keys():
-            if pq.getSize() < k:
-                pq.enqueue(self.Freq(key, dict[key]))
-            elif dict[key] > pq.getFront().freq:
-                pq.dequeue()
-                pq.enqueue(self.Freq(key, dict[key]))
+        dictSort = sorted(dict.items(), key = operator.itemgetter(1), reverse = True)
         list = []
-        while not pq.isEmpty():
-            d = pq.dequeue().e
-            list.append(d)
+        for d in dictSort:
+            if len(list) < k:
+                list.append(d[0])
+            else:
+                break
         return list
 
 
 if __name__ == '__main__':
     solution = Solution()
-    dict = solution.topKFrequent([1,1,1,2,2,3,4], 3)
+    dict = solution.topKFrequent([1,2,2,1,1,3], 2)
     print(dict)
