@@ -15,7 +15,7 @@ class SegementTreeTest(Merger):
     def merge(self, a, b):
         return int(a+b)
 if __name__ == '__main__':
-    nums = [-2, 0, 3, -5, 2, -1]
+    nums = [1,3,5]
     segTest = SegementTreeTest()
     segTree = SegementTree(nums, segTest)
     print(segTree)
@@ -24,5 +24,6 @@ if __name__ == '__main__':
     print(result)
     result = segTree.query(2, 5)
     print(result)
-    result = segTree.query(0, 5)
+    segTree.set(1, 2)
+    result = segTree.query(0, 2)
     print(result)
