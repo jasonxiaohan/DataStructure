@@ -55,3 +55,15 @@ class Trie:
             cur = cur.next.get(w)
         return cur.isWord
 
+    def isPrefix(self, prefix):
+        """
+        查询是否在Trie中有单词以prefix为前缀
+        :param prefix:
+        :return:
+        """
+        cur = self.root
+        for w in prefix:
+            if cur.next.get(w) == None:
+                return False
+            cur = cur.next.get(w)
+        return True
