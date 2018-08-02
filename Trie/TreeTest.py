@@ -11,6 +11,7 @@ import time
 
 if __name__ == '__main__':
     words = FileOperation.readFile('../pride-and-prejudice.txt')
+    print("Total word："+str(len(words)))
     starTime = time.clock()
     set = BSTSet()
     for word in words:
