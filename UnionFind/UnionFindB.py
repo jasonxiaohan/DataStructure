@@ -30,7 +30,7 @@ class UnionFindB(UF):
 
     def unionElements(self, p, q):
         """
-        查找过程，查找元素p所对应的集合编号
+        合并元素p和元素q所属的集合
         O(h)复杂度，h为树的高度
         :param p:
         :param q:

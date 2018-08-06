@@ -30,7 +30,7 @@ class UnionFindD(UF):
 
     def unionElements(self, p, q):
         """
-        查找过程，查找元素p所对应的集合编号
+        合并元素p和元素q所属的集合
         O(h)复杂度，h为树的高度
         :param p:
         :param q:
@@ -48,7 +48,7 @@ class UnionFindD(UF):
         elif self.__rank[qRoot] < self.__rank[pRoot]:
             self.__parent[qRoot] = pRoot
         else:
-            self.__parent[qRoot] = pRoot
+            self.__parent[pRoot] = qRoot
             self.__rank[qRoot] += 1
 
     def find(self, p):

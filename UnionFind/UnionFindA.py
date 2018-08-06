@@ -31,6 +31,8 @@ class UnionFindA(UF):
         :param q:
         :return:
         """
+        return self.find(p) == self.find(q)
+
     def unionElements(self, p, q):
         """
         合并元素p和元素q所属的集合
@@ -44,7 +46,8 @@ class UnionFindA(UF):
 
         if pID == qID:
             return
-        for i in range(len(self.__id)):
+        count = len(self.__id)
+        for i in range(count):
             if self.__id[i] == pID:
                 self.__id[i] = qID
 
