@@ -129,7 +129,59 @@ class AVLTree(Map):
         balanceFactor = self.__getBalanceFactor(node)
         if abs(balanceFactor) > 1:
             print("unbalanced："+str(balanceFactor))
+        # 平衡维护
+        if balanceFactor > 1 and self.__getBalanceFactor(node.left) >= 0:
+            return self.__rightRotate(node)
+        if balanceFactor < -1 and self.__getBalanceFactor(node.right) <= 0:
+            return self.__leftRotate(node)
+
         return node
+
+    def __rightRotate(self, y):
+        """
+        对节点nodeY进行向右旋转操作，返回旋转后新的根节点x
+           y                              x
+          / \                           /   \
+          x   T4     向右旋转 (y)        z     y
+         / \       - - - - - - - ->    / \   / \
+        z   T3                       T1  T2 T3 T4
+       / \
+     T1   T2
+        :param y:
+        :return:
+        """
+        x = y.left
+        T3 = x.right
+        # 向右旋转
+        x.right = y
+        y.left = T3
+        # 更新height值
+        y.height = max(self.__getHeight(y.left), self.__getHeight(y.right)) + 1
+        x.height = max(self.__getHeight(x.left), self.__getHeight(x.right)) + 1
+        return x
+
+    def __leftRotate(self, y):
+        """
+        // 对节点y进行向左旋转操作，返回旋转后新的根节点x
+    //    y                             x
+    //  /  \                          /   \
+    // T1   x      向左旋转 (y)       y     z
+    //     / \   - - - - - - - ->   / \   / \
+    //   T2  z                     T1 T2 T3 T4
+    //      / \
+    //     T3 T4
+        :param x:
+        :return:
+        """
+        x = y.right
+        T2 = x.left
+        # 向左旋转过程
+        x.left = y
+        y.right = T2
+        y.height = max(self.__getHeight(y.left), self.__getHeight(y.right)) + 1
+        x.height = max(self.__getHeight(x.left), self.__getHeight(x.right)) + 1
+        return x
+
 
     # 返回以node为根节点的二分搜索树，key所在的节点
     def __getNode(self, node, key):
