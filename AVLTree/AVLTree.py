@@ -127,14 +127,23 @@ class AVLTree(Map):
         node.height = 1 + int(max(self.__getHeight(node.right), self.__getHeight(node.left)))
         # 计算平衡因子
         balanceFactor = self.__getBalanceFactor(node)
-        if abs(balanceFactor) > 1:
-            print("unbalanced："+str(balanceFactor))
+        # if abs(balanceFactor) > 1:
+        #     print("unbalanced："+str(balanceFactor))
         # 平衡维护
+        # LL
         if balanceFactor > 1 and self.__getBalanceFactor(node.left) >= 0:
             return self.__rightRotate(node)
+        # RR
         if balanceFactor < -1 and self.__getBalanceFactor(node.right) <= 0:
             return self.__leftRotate(node)
-
+        # LR
+        if balanceFactor > 1 and self.__getBalanceFactor(node.left) < 0:
+            node.left = self.__leftRotate(node.left)
+            return self.__rightRotate(node)
+        # RL
+        if balanceFactor < - 1 and self.__getBalanceFactor(node.right) > 0:
+            node.right = self.__rightRotate(node.right)
+            return self.__leftRotate(node)
         return node
 
     def __rightRotate(self, y):
@@ -254,27 +263,55 @@ class AVLTree(Map):
             return None
         if (key < node.key):
             node.left = self.__remove(node.left, key)
-            return node
+            retNode = node
         elif (key > node.key):
             node.right = self.__remove(node.right, key)
-            return node
+            retNode = node
         else:
             if (node.left == None):
                 nodeRight = node.right
                 node.right = None
                 self.size -= 1
-                return nodeRight
-            if (node.right == None):
+                retNode = nodeRight
+            elif (node.right == None):
                 nodeLeft = node.left
                 node.left = None
                 self.size -= 1
-                return nodeLeft
-            # 否则存在左右两个子树
-            successor = self.__minxmum(node.right)
-            successor.right = self.__removeMin(node.right)
-            successor.left = node.left
-            node.left = node.right = None
-            return successor
+                retNode = nodeLeft
+            else:
+                # 待删除节点左右字数均不为空的情况
+                # 找到比待删除节点大的最小节点，即待删除节点右子树的最小节点
+                # 用这个节点顶替待删除节点的位置
+                successor = self.__minxmum(node.right)
+                successor.right = self.__remove(node.right, successor.key)
+                successor.left = node.left
+                node.left = node.right = None
+                retNode = successor
+        if retNode == None:
+            return None
+
+        # 更新height值
+        retNode.height = 1 + int(max(self.__getHeight(retNode.right), self.__getHeight(retNode.left)))
+        # 计算平衡因子
+        balanceFactor = self.__getBalanceFactor(retNode)
+
+        # 平衡维护
+        # LL
+        if balanceFactor > 1 and self.__getBalanceFactor(retNode.left) >= 0:
+            return self.__rightRotate(retNode)
+        # RR
+        if balanceFactor < -1 and self.__getBalanceFactor(retNode.right) <= 0:
+            return self.__leftRotate(retNode)
+        # LR
+        if balanceFactor > 1 and self.__getBalanceFactor(retNode.left) < 0:
+            retNode.left = self.__leftRotate(retNode.left)
+            return self.__rightRotate(retNode)
+        # RL
+        if balanceFactor < - 1 and self.__getBalanceFactor(retNode.right) > 0:
+            retNode.right = self.__rightRotate(retNode.right)
+            return self.__leftRotate(retNode)
+        return retNode
+
 if __name__ == '__main__':
     filename = '../pride-and-prejudice.txt'
     words = FileOperation.readFile(filename)

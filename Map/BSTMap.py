@@ -10,7 +10,8 @@
 """
 from DataStructure.FileOperation import FileOperation
 from DataStructure.Map.Map import Map
-
+import sys
+sys.setrecursionlimit(100000) #例如这里设置为十万
 """
 使用二分搜索树实现map
 """
