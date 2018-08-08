@@ -8,6 +8,7 @@ import time
 from DataStructure.FileOperation import FileOperation
 from DataStructure.Set.LinkedListSet import LinkedListSet
 from DataStructure.Set.BSTSet import BSTSet
+from DataStructure.Set.AVLSet import AVLSet
 
 """
 链表、二分搜索树实现集合，
@@ -43,3 +44,7 @@ if __name__ == '__main__':
     linkSet = LinkedListSet()
     time2 = LinkedAndBinarySetDiff._testQueue(linkSet, filename)
     print("LinkedList Set："+str(time2)+"s")
+
+    avlSet = AVLSet()
+    time3 = LinkedAndBinarySetDiff._testQueue(avlSet, filename)
+    print("AVL Set：" + str(time3) + "s")

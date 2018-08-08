@@ -11,6 +11,7 @@
 from DataStructure.FileOperation import FileOperation
 from DataStructure.Map.BSTMap import BSTMap
 from DataStructure.Map.LinkedListMap import LinkedListMap
+from DataStructure.Map.AVLMap import AVLMap
 import time
 
 class MapTest:
@@ -36,3 +37,7 @@ if __name__ == '__main__':
     linkedMap = LinkedListMap()
     time2 = MapTest.testMap(linkedMap,filename)
     print("LinkedList Map："+str(time2)+" s")
+
+    avlMap = AVLMap()
+    time3 = MapTest.testMap(avlMap, filename)
+    print("AVL Map：" + str(time3) + " s")
