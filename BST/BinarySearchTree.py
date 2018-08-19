@@ -8,12 +8,13 @@ from DataStructure.LinkedList import LinkedList
 
 class BinarySearchTree:
     class Node:
-        e = None
+        key =value = None
         # 左子树、右子树
         left = right = None
 
-        def __init__(self, e):
-            self.e = e
+        def __init__(self, key, value):
+            self.key = key
+            self.value = value
 
     root = None
     size = 0
@@ -33,7 +34,7 @@ class BinarySearchTree:
         if node == None:
             self.res += self.__generateDepthString(depth)+"null\n"
             return
-        self.res += self.__generateDepthString(depth) + str(node.e) +"\n"
+        self.res += self.__generateDepthString(depth) + str(node.key) +"\n"
 
         str(self.__generateBSTString(node.left, int(depth + 1)))
         str(self.__generateBSTString(node.right, int(depth + 1)))
@@ -50,7 +51,7 @@ class BinarySearchTree:
     def isEmpty(self):
         return self.size == 0
 
-    def add(self, e):
+    def add(self, key, value):
         """
         if self.root == None:
             self.root = self.Node(e)
@@ -58,12 +59,12 @@ class BinarySearchTree:
         else:
             self.__add(self.root, e)
         """
-        self.root = self.__add(self.root, e)
+        self.root = self.__add(self.root, key, value)
     """
    向node为根的二分搜索树中插入元素e，递归算法 
    返回插入新节点后二分搜索树的根
     """
-    def __add(self, node, e):
+    def __add(self, node, key, value):
         """
         if node.e == e:
             return
@@ -79,31 +80,31 @@ class BinarySearchTree:
         """
         if node == None:
             self.size += 1
-            return self.Node(e)
-        if e < node.e:
-            node.left = self.__add(node.left, e)
-        elif e> node.e:
-            node.right = self.__add(node.right, e)
+            return self.Node(key, value)
+        if key < node.key:
+            node.left = self.__add(node.left, key, value)
+        elif key > node.key:
+            node.right = self.__add(node.right, key, value)
         return node
 
     """
     看二分搜索树中是否包含元素e
     """
-    def contains(self, e):
-        return self.__contains(self.root, e)
+    def contains(self, key):
+        return self.__contains(self.root, key)
 
     """
     看以node为根的二分搜索树中是否包含元素e，递归算法
     """
-    def __contains(self, node, e):
+    def __contains(self, node, key):
         if node == None:
             return False
-        if node.e == e:
+        if node.key == key:
             return True
-        elif e < node.e:
-            return self.__contains(node.left, e)
+        elif key < node.key:
+            return self.__contains(node.left, key)
         else:
-            return self.__contains(node.right, e)
+            return self.__contains(node.right, key)
 
     """
     二分搜索树的前序遍历
@@ -117,7 +118,7 @@ class BinarySearchTree:
     def __preOrder(self, node):
         if node == None:
             return
-        print(node.e)
+        print(node.key)
         self.__preOrder(node.left)
         self.__preOrder(node.right)
 
@@ -129,7 +130,7 @@ class BinarySearchTree:
         stack.push(self.root)
         while not stack.isEmpty():
             cur = stack.pop()
-            print(cur.e)
+            print(cur.key)
             if(cur.right != None):
                 stack.push(cur.right)
             if(cur.left != None):
@@ -143,7 +144,7 @@ class BinarySearchTree:
         queue.addFirst(self.root)
         while not queue.isEmpty():
             cur = queue.removeFirst()
-            print(cur.e)
+            print(cur.key)
             if(cur.left != None):
                 queue.addLast(cur.left)
             if(cur.right != None):
@@ -153,7 +154,7 @@ class BinarySearchTree:
     寻找二分搜索树的最小元素
     """
     def minxmum(self):
-        return self.__minxmum(self.root).e
+        return self.__minxmum(self.root).key
 
     def __minxmum(self, node):
         if(self.size == 0):
@@ -167,7 +168,7 @@ class BinarySearchTree:
     寻找二分搜索树中的最大元素
     """
     def maximum(self):
-        return self.__maximum(self.root).e
+        return self.__maximum(self.root).key
 
     def __maximum(self, node):
         if(self.size == 0):
@@ -213,17 +214,17 @@ class BinarySearchTree:
     """
     删除元素e
     """
-    def remove(self, e):
-        self.root = self.__remove(self.root, e)
+    def remove(self, key):
+        self.root = self.__remove(self.root, key)
 
-    def __remove(self, node, e):
+    def __remove(self, node, key):
         if(node == None):
             return None
-        if(e < node.e):
-            node.left = self.__remove(node.left, e)
+        if(key < node.key):
+            node.left = self.__remove(node.left, key)
             return node
-        elif(e > node.e):
-            node.right = self.__remove(node.right, e)
+        elif(key > node.key):
+            node.right = self.__remove(node.right, key)
             return node
         else:
             if(node.left == None):
@@ -245,22 +246,20 @@ class BinarySearchTree:
 
 
 
-"""
-if __name__ == '__main__':
-  """
-"""
-         5 
+# if __name__ == '__main__':
+    """
+        5 
        /   \ 
       3     6 
      /  \    \ 
     2    4    8 
-"""
-"""
+    """
+    """
     bst = BinarySearchTree()
     # nums = [5,3,6,8,4,2]
     nums = [41, 58, 50, 42, 53, 60, 59, 63]
     for i in nums:
-        bst.add(i)
+        bst.add(i, None)
     # bst.preOrder()
     print("")
     print(bst)
